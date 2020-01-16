@@ -174,8 +174,8 @@ class GenAlgTSP:
             self.current_fitness = self.population_fitness()
             average_fitness[g] = np.mean(self.current_fitness)
             max_fitness[g] = np.max(self.current_fitness)
-            # if g % 50 == 0:
-            #   gen_alg.plot_world(g)
+            if g % 50 == 0:
+                gen_alg.plot_world(g)
 
         plt.figure(figsize=(8, 5))
         plt.xlabel('Generacja')
@@ -183,12 +183,11 @@ class GenAlgTSP:
         plt.plot(range(n), average_fitness, 'blue', label='średnia')
         plt.plot(range(n), max_fitness, 'orange', label='maksimum')
         plt.legend()
-        plt.savefig(str(np.random.randint()))
         plt.figure(figsize=(8, 5))
         plt.xlabel('Generacja')
         plt.ylabel('Całkowita odległość')
         plt.plot(range(n), 1 / max_fitness, 'blue')
-        #plt.show()
+        plt.show()
 
     def greedy_algorithm(self):
         """Zwraca trasę i jej dystans dla algorytmu zachłannego."""
@@ -201,7 +200,7 @@ class GenAlgTSP:
         return greedy_route, self.route_distance(greedy_route)
 
 
-# ax = fig.add_subplot(1, 1, 1)
+ax = fig.add_subplot(1, 1, 1)
 gen_alg = GenAlgTSP(NUMBER_OF_CITIES, POPULATION_SIZE, MUTATION_PROBABILITY)
 gen_alg.cycle(500)
 print("Dystanse:\n", "Algorytm genetyczny:", gen_alg.route_distance(gen_alg.current_best_member),
